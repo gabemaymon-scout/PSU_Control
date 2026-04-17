@@ -1,8 +1,13 @@
 import pyvisa
 import time
 
-VOLTAGE = 0
+# Explicitly use the '@py' backend
+rm = pyvisa.ResourceManager('@py') 
 
-rm = pyvisa.ResourceManager()  # NI-VISA backend
 resources = rm.list_resources()
-print("Detected resources:", resources)
+
+if not resources:
+    print("No resources detected. If using USB, check your permissions (udev rules).")
+else:
+    print("Detected resources:", resources)
+
